@@ -20,12 +20,12 @@
 
    Camera.SetResolution(640,480);
  
-   //Get frames form the camera 
+   //Get frames from the camera 
    cs::CvSink sink = CameraServer::GetInstance()->GetVideo();
-   //convert fram into gray scale (600 by 400)
+   //Grayscale the frame (600 by 400)
    cs::CvSource source = CameraServer::GetInstance()->PutVideo("Gray",640,480);
 
-  // create a mat(a array with more then one dimension) variable
+  // create a mat(an array with more then one dimension) variable
   Mat matSource;
   //Mat matOutput;
   while(true)
@@ -33,7 +33,7 @@
     //grabbing a frame
     sink.GrabFrame(matSource);
 
-    //convert the source frame into Gray scale
+    //Grayscale the source frame
     //cvtColor(matSource,matOutput,COLOR_BGR2GRAY);
 
     //Put the frame back
@@ -46,7 +46,7 @@
 void Robot::RobotInit() 
 {
 
-  //create a thread for only vison processing
+  //create a thread for only vision processing
   std::thread VideoProcessing(Video);
 
   VideoProcessing.detach();
