@@ -22,14 +22,14 @@ void VisionTracking::ImageProcessing()
   int high1 = 0;
   int high2 = 0;
   int high3 = 0;
-  cv::Mat newImage;
+  cv::Mat endImage;
 
   cv::VideoCapture cam;
   cv::Mat image;
   cam.open(0);
   cam >> image;
 
-  cv::inRange(image, cv::Scalar(low1, low2, low3), cv::Scalar(high1, high2, high3), newImage);
+  cv::inRange(image, cv::Scalar(low1, low2, low3), cv::Scalar(high1, high2, high3), endImage);
 }
 
 
