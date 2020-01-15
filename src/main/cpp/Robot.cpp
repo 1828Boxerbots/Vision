@@ -7,6 +7,8 @@
 
 #include "Robot.h"
 
+#include <opencv2/opencv.hpp>
+
 #include <frc/commands/Scheduler.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 
@@ -27,7 +29,15 @@ void Robot::RobotInit() {
  * <p> This runs after the mode specific periodic functions, but before
  * LiveWindow and SmartDashboard integrated updating.
  */
-void Robot::RobotPeriodic() {}
+void Robot::RobotPeriodic() 
+{
+  cv::Mat image;
+  cv::VideoCapture cam;
+  cam.open(0);
+  cam >> image;
+
+  cv::imshow("BRUH", image);
+}
 
 /**
  * This function is called once each time the robot enters Disabled mode. You

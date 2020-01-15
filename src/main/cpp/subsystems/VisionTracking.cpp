@@ -30,6 +30,8 @@ void VisionTracking::ImageProcessing()
   cam >> image;
 
   cv::inRange(image, cv::Scalar(low1, low2, low3), cv::Scalar(high1, high2, high3), endImage);
+
+  cv::imshow("BRUH", endImage);
 }
 
 
