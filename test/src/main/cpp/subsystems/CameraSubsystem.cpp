@@ -54,8 +54,11 @@ int CameraSubsystem::WhereToTurn()
 
 void CameraSubsystem::PrintTurn(int turn)
 {
-    double print = turn;
-    frc::SmartDashboard::PutNumber("turn",print);
+    double printturn = turn;
+    double printX = center.x;
+    frc::SmartDashboard::PutNumber("turn",printturn);
+    frc::SmartDashboard::PutNumber("center of x",printX);
+ 
 }
 
 
