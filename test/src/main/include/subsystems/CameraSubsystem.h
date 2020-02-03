@@ -14,6 +14,8 @@
 #include <opencv2/imgproc.hpp>
 #include <opencv2/videoio.hpp>
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <cameraserver/CameraServer.h>
+#include "Constants.h"
 using namespace cv;
 
 class CameraSubsystem : public frc2::SubsystemBase {
@@ -39,8 +41,13 @@ class CameraSubsystem : public frc2::SubsystemBase {
   VideoCapture video;
   Mat output;
   Mat colorFiliter;
-  Mat closeFilter;
+  //Mat closeFilter;
+  Mat Output;
+  Mat dilution;
   Mat openFilter;
   cv::Moments moment;
   cv::Point center;
+  
+  double printX;
+  
 };
