@@ -34,9 +34,9 @@ public:
 
 private:
 	//Should go into constants.h
-	const int LOWH_RED = 0;
-	const int HIGHH_RED = 6;
-	const int LOWS_RED = 134;
+	const int LOWH_RED = 169;
+	const int HIGHH_RED = 179;
+	const int LOWS_RED = 135;
 	const int HIGHS_RED = 255;
 	const int LOWV_RED = 0;
 	const int HIGHV_RED = 255;
