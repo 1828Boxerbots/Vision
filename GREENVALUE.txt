@@ -1,2 +1,0 @@
-Minimum RGB value for green light (0,90,0)
-Maximum RGB value for green light (46,255,255)
