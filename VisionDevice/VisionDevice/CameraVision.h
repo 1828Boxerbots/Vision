@@ -2,9 +2,6 @@
 #include <opencv2/core.hpp>
 #include <opencv2/videoio.hpp>
 
-
-
-
 class CameraVision
 {
 public:
@@ -21,7 +18,7 @@ public:
 	///		true = initialization successful
 	///		false = error occured
 	/// </returns>
-	bool Init();
+	virtual bool Init();
 
 	/// <summary>
 	/// Which direction should the robot turn and how fast
@@ -32,14 +29,26 @@ public:
 	/// </returns>
 	double WhereToTurn();
 
+	/// <summary>
+	/// Filters the image and gets the position of its center
+	/// </summary>
+	cv::Point SetColor(cv::Mat frame);
+
 private:
 	//Should go into constants.h
-	const int LOWH_RED = 169;
-	const int HIGHH_RED = 179;
-	const int LOWS_RED = 135;
+	const int LOWH_RED = 0;
+	const int HIGHH_RED = 6;
+	const int LOWS_RED = 134;
 	const int HIGHS_RED = 255;
 	const int LOWV_RED = 0;
 	const int HIGHV_RED = 255;
+	//Neon Green
+	const int LOWH_GREEN = 79;
+	const int HIGHH_GREEN = 91;
+	const int LOWS_GREEN = 56;
+	const int HIGHS_GREEN = 255;
+	const int LOWV_GREEN = 250;
+	const int HIGHV_GREEN = 255;
 
 	//Values that it is filtering by
 	int m_iLowH = LOWH_RED;
@@ -68,18 +77,14 @@ private:
 	/// </summary>
 	/// <param name="title">String of what the window is called</param>
 	/// <param name="frame">The image that should be displayed</param>
-	void SendImage(std::string title, cv::Mat frame);
+	virtual void SendImage(std::string title, cv::Mat frame);
 
 	/// <summary>
 	/// Find the blob on the image
 	/// </summary>
 	/// <returns>True - The image is fine  False - The image is empty </returns>
-	bool GetBlob();
+	virtual bool GetBlob();
 
-	/// <summary>
-	/// Filters the image and gets the position of its center
-	/// </summary>
-	void SetColor();
-
+	void ChangeColor(char color);
 };
 

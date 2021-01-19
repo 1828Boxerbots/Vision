@@ -41,8 +41,8 @@ double CameraVision::WhereToTurn()
 		return -2.0;
 	}
 
-	std::cout << m_centroidX << std::endl;
-	std::cout << m_centroidY << std::endl;
+	//std::cout << m_centroidX << std::endl;
+	//std::cout << m_centroidY << std::endl;
 
 	//Get the Center of the screen
 	double screenCenter = m_frame.size().width / 2;
@@ -64,7 +64,7 @@ double CameraVision::WhereToTurn()
 	cv::putText(textImg, powerPercentageStr, cv::Point(m_centroidX, m_centroidY), cv::FONT_HERSHEY_SIMPLEX, 2.0, cv::Scalar(255, 0, 0), 2);
 
 	//cv::addText(textImg, "Ben", cv::Point(320, 240), font);
-	SendImage("TextImage", textImg);
+	//SendImage("TextImage", textImg);
 	return (m_centroidX - screenCenter) / screenCenter;
 }
 
@@ -76,13 +76,27 @@ void CameraVision::SendImage(std::string title, cv::Mat frame)
 
 bool CameraVision::GetBlob()
 {
+	std::cout << "Press now!" << std::endl;
+	if (cv::waitKey(120) == 'r')
+	{
+		ChangeColor('r');
+	}
+	if (cv::waitKey(120) == 27)
+	{
+		ChangeColor('g');
+	}
+
 	//Gets one frame from camera
 	m_camera >> m_frame;
 	if (m_frame.empty() == true)
 		return false; //Exit if empty
 
 	//Filter the image
-	SetColor();
+	/*SetColor(m_frame);*/
+
+	cv::Point momentPoint = SetColor(m_frame);
+	m_centroidX = momentPoint.x;
+	m_centroidY = momentPoint.y;
 
 	//Place a 2 line where the blob is
 	cv::line(m_frame, cv::Point(0, m_centroidY), cv::Point(m_frame.size().width, m_centroidY), cv::Scalar(0,0,255), 3);
@@ -106,11 +120,11 @@ bool CameraVision::GetBlob()
 	return true;
 }
 
-void CameraVision::SetColor()
+cv::Point CameraVision::SetColor(cv::Mat frame)
 {
 	//Change the camera image from BGR to HSV - Blue Green Red to Hue Saturation Value
 	cv::Mat imgHSV;
-	cv::cvtColor(m_frame, imgHSV, cv::COLOR_BGR2HSV);
+	cv::cvtColor(frame, imgHSV, cv::COLOR_BGR2HSV);
 	SendImage("grey image", imgHSV);
 
 	//Looks for specifc colors in the image
@@ -122,6 +136,34 @@ void CameraVision::SetColor()
 	cv::Moments m = cv::moments(imgThresholded, true);
 	m_centroidX = m.m10 / m.m00;
 	m_centroidY = m.m01 / m.m00;
-	cv::Point p(m_centroidX, m_centroidY);
+	return cv::Point (m_centroidX, m_centroidY);
 
+}
+
+void CameraVision::ChangeColor(char color)
+{
+	switch (color)
+	{
+	case 'r':
+		m_iLowH = LOWH_RED;
+		m_iLowS = LOWS_RED;
+		m_iLowV = LOWV_RED;
+		m_iHighH = HIGHH_RED;
+		m_iHighS = HIGHS_RED;
+		m_iHighV = HIGHV_RED;
+		std::cout << "Changed to red" << std::endl;
+		break;
+	case 'g':
+		m_iLowH = LOWH_GREEN;
+		m_iLowS = LOWS_GREEN;
+		m_iLowV = LOWV_GREEN;
+		m_iHighH = HIGHH_GREEN;
+		m_iHighS = HIGHS_GREEN;
+		m_iHighV = HIGHV_GREEN;
+		std::cout << "Changed to green" << std::endl;
+		break;
+	default:
+		std::cout << "Default" << std::endl;
+		break;
+	}
 }

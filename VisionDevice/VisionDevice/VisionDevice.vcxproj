@@ -143,10 +143,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CameraVision.cpp" />
+    <ClCompile Include="RobotVision.cpp" />
     <ClCompile Include="VisionDevice.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CameraVision.h" />
+    <ClInclude Include="RobotVision.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
