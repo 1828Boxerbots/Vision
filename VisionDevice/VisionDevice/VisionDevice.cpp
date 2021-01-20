@@ -2,12 +2,12 @@
 //
 
 #include <iostream>
-#include "CameraVision.h"
+#include "WindowsVisionBase.h"
 
 
 int main()
 {
-    CameraVision m_camera{ 0 };
+    WindowsVisionBase m_camera{ 0 };
     m_camera.Init();
     while (true)
     {
