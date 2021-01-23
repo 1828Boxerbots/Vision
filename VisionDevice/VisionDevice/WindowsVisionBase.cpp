@@ -1,4 +1,4 @@
-#include "Drivers/CameraDrivers/WindowsVisionBase.h"
+#include "WindowsVisionBase.h"
 #include <opencv2/core.hpp>
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui.hpp>
